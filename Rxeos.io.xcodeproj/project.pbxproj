@@ -63,6 +63,7 @@
 		505827EB282C209400BBB616 /* MockAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
 		5058280B282C327500BBB616 /* EOSSearchInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EOSSearchInputValidator.swift; sourceTree = "<group>"; };
 		5058280D282C36CE00BBB616 /* MockValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockValidator.swift; sourceTree = "<group>"; };
+		5058280F282C39B500BBB616 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		50E32020282BAE8600B46865 /* Rxeos.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rxeos.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E32023282BAE8600B46865 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50E32025282BAE8600B46865 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		50E32017282BAE8600B46865 = {
 			isa = PBXGroup;
 			children = (
+				5058280F282C39B500BBB616 /* README.md */,
 				50E32022282BAE8600B46865 /* Rxeos.io */,
 				50E32039282BAE8800B46865 /* Rxeos.ioTests */,
 				50E32043282BAE8800B46865 /* Rxeos.ioUITests */,
