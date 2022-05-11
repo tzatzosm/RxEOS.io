@@ -99,13 +99,9 @@
 		50E32022282BAE8600B46865 /* Rxeos.io */ = {
 			isa = PBXGroup;
 			children = (
-				50E32023282BAE8600B46865 /* AppDelegate.swift */,
-				50E32025282BAE8600B46865 /* SceneDelegate.swift */,
-				50E32027282BAE8600B46865 /* ViewController.swift */,
-				50E32029282BAE8600B46865 /* Main.storyboard */,
-				50E3202C282BAE8800B46865 /* Assets.xcassets */,
-				50E3202E282BAE8800B46865 /* LaunchScreen.storyboard */,
-				50E32031282BAE8800B46865 /* Info.plist */,
+				50E32053282BAE9200B46865 /* App */,
+				50E32055282BAEAA00B46865 /* Presentation */,
+				50E32054282BAE9C00B46865 /* Resources */,
 			);
 			path = Rxeos.io;
 			sourceTree = "<group>";
@@ -125,6 +121,34 @@
 				50E32046282BAE8800B46865 /* Rxeos_ioUITestsLaunchTests.swift */,
 			);
 			path = Rxeos.ioUITests;
+			sourceTree = "<group>";
+		};
+		50E32053282BAE9200B46865 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				50E32023282BAE8600B46865 /* AppDelegate.swift */,
+				50E32025282BAE8600B46865 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		50E32054282BAE9C00B46865 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				50E32029282BAE8600B46865 /* Main.storyboard */,
+				50E3202C282BAE8800B46865 /* Assets.xcassets */,
+				50E3202E282BAE8800B46865 /* LaunchScreen.storyboard */,
+				50E32031282BAE8800B46865 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		50E32055282BAEAA00B46865 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				50E32027282BAE8600B46865 /* ViewController.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,7 +463,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7FGAFC5ZWR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Rxeos.io/Info.plist;
+				INFOPLIST_FILE = Rxeos.io/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -467,7 +491,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7FGAFC5ZWR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Rxeos.io/Info.plist;
+				INFOPLIST_FILE = Rxeos.io/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
