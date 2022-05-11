@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		50E32024282BAE8600B46865 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32023282BAE8600B46865 /* AppDelegate.swift */; };
 		50E32026282BAE8600B46865 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32025282BAE8600B46865 /* SceneDelegate.swift */; };
-		50E32028282BAE8600B46865 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32027282BAE8600B46865 /* ViewController.swift */; };
-		50E3202B282BAE8600B46865 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50E32029282BAE8600B46865 /* Main.storyboard */; };
 		50E3202D282BAE8800B46865 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50E3202C282BAE8800B46865 /* Assets.xcassets */; };
 		50E32030282BAE8800B46865 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50E3202E282BAE8800B46865 /* LaunchScreen.storyboard */; };
 		50E3203B282BAE8800B46865 /* Rxeos_ioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E3203A282BAE8800B46865 /* Rxeos_ioTests.swift */; };
 		50E32045282BAE8800B46865 /* Rxeos_ioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32044282BAE8800B46865 /* Rxeos_ioUITests.swift */; };
 		50E32047282BAE8800B46865 /* Rxeos_ioUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32046282BAE8800B46865 /* Rxeos_ioUITestsLaunchTests.swift */; };
+		50E32059282BAF9900B46865 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32057282BAF9900B46865 /* SearchViewController.swift */; };
+		50E3205A282BAF9900B46865 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E32058282BAF9900B46865 /* SearchViewController.xib */; };
+		50E3205D282BAFB200B46865 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E3205C282BAFB200B46865 /* SearchViewModel.swift */; };
+		50E32060282BAFD100B46865 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E3205F282BAFD100B46865 /* AnyViewModel.swift */; };
+		50E32062282BB0AF00B46865 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32061282BB0AF00B46865 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +42,6 @@
 		50E32020282BAE8600B46865 /* Rxeos.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rxeos.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E32023282BAE8600B46865 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50E32025282BAE8600B46865 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		50E32027282BAE8600B46865 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		50E3202A282BAE8600B46865 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50E3202C282BAE8800B46865 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50E3202F282BAE8800B46865 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50E32031282BAE8800B46865 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +50,11 @@
 		50E32040282BAE8800B46865 /* Rxeos.ioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rxeos.ioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E32044282BAE8800B46865 /* Rxeos_ioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rxeos_ioUITests.swift; sourceTree = "<group>"; };
 		50E32046282BAE8800B46865 /* Rxeos_ioUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rxeos_ioUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		50E32057282BAF9900B46865 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		50E32058282BAF9900B46865 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		50E3205C282BAFB200B46865 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		50E3205F282BAFD100B46865 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
+		50E32061282BB0AF00B46865 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +134,7 @@
 			children = (
 				50E32023282BAE8600B46865 /* AppDelegate.swift */,
 				50E32025282BAE8600B46865 /* SceneDelegate.swift */,
+				50E32061282BB0AF00B46865 /* AppCoordinator.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -135,7 +142,6 @@
 		50E32054282BAE9C00B46865 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				50E32029282BAE8600B46865 /* Main.storyboard */,
 				50E3202C282BAE8800B46865 /* Assets.xcassets */,
 				50E3202E282BAE8800B46865 /* LaunchScreen.storyboard */,
 				50E32031282BAE8800B46865 /* Info.plist */,
@@ -146,9 +152,28 @@
 		50E32055282BAEAA00B46865 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				50E32027282BAE8600B46865 /* ViewController.swift */,
+				50E3205E282BAFC700B46865 /* Base */,
+				50E32056282BAF8300B46865 /* Search */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		50E32056282BAF8300B46865 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				50E32057282BAF9900B46865 /* SearchViewController.swift */,
+				50E32058282BAF9900B46865 /* SearchViewController.xib */,
+				50E3205C282BAFB200B46865 /* SearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		50E3205E282BAFC700B46865 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				50E3205F282BAFD100B46865 /* AnyViewModel.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +282,7 @@
 			files = (
 				50E32030282BAE8800B46865 /* LaunchScreen.storyboard in Resources */,
 				50E3202D282BAE8800B46865 /* Assets.xcassets in Resources */,
-				50E3202B282BAE8600B46865 /* Main.storyboard in Resources */,
+				50E3205A282BAF9900B46865 /* SearchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,8 +307,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50E32028282BAE8600B46865 /* ViewController.swift in Sources */,
+				50E32062282BB0AF00B46865 /* AppCoordinator.swift in Sources */,
+				50E32059282BAF9900B46865 /* SearchViewController.swift in Sources */,
 				50E32024282BAE8600B46865 /* AppDelegate.swift in Sources */,
+				50E3205D282BAFB200B46865 /* SearchViewModel.swift in Sources */,
+				50E32060282BAFD100B46865 /* AnyViewModel.swift in Sources */,
 				50E32026282BAE8600B46865 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,14 +349,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		50E32029282BAE8600B46865 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				50E3202A282BAE8600B46865 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		50E3202E282BAE8800B46865 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -466,7 +486,6 @@
 				INFOPLIST_FILE = Rxeos.io/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -494,7 +513,6 @@
 				INFOPLIST_FILE = Rxeos.io/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
