@@ -14,7 +14,9 @@ struct SearchViewModel: AnyViewModel {
     struct Input {
         var searchInput: Observable<String>
         var searchClick: Observable<()>
+        let ramStorageUnit: Observable<UnitInformationStorage>
         let cpuDurationUnit: Observable<UnitDuration>
+        let netStorageUnit: Observable<UnitInformationStorage>
     }
     
     struct Output {
@@ -23,17 +25,18 @@ struct SearchViewModel: AnyViewModel {
             let max: Driver<String>
             let available: Driver<String>
             let used: Driver<String>
+            let unit: Driver<String>
         }
         
         struct RamUsage {
             let quota: Driver<String>
             let usage: Driver<String>
+            let unit: Driver<String>
         }
         
         let errorMessage: Driver<String?>
         let eosBalance: Driver<String>
         let cpu: ResourceLimit
-        let cpuDurationUnit: Driver<String>
         let net: ResourceLimit
         let ram: RamUsage
         let availableDurationUnits: Driver<[UnitDuration]>
@@ -87,21 +90,21 @@ struct SearchViewModel: AnyViewModel {
             limit: getAccountResponse.map(\.cpuLimit),
             error: getAccountResponseError,
             unit: input.cpuDurationUnit,
-            defaultUnit: UnitDuration.microseconds)
-        let cpuDurationUnit = input.cpuDurationUnit
-            .map { measurementFormatter.string(from: $0) }
-            .asDriver(onErrorJustReturn: "")
+            defaultUnit: .microseconds)
         let netLimit = makeLimit(
             limit: getAccountResponse.map(\.netLimit),
             error: getAccountResponseError,
-            unit: .just(UnitInformationStorage.bytes),
-            defaultUnit: UnitInformationStorage.bytes)
-        let ram = makeRam(response: getAccountResponse, error: getAccountResponseError)
+            unit: input.netStorageUnit,
+            defaultUnit: .bytes)
+        let ram = makeRam(
+            response: getAccountResponse,
+            error: getAccountResponseError,
+            unit: input.ramStorageUnit,
+            defaultUnit: .bytes)
         return .init(
             errorMessage: errorMessage,
             eosBalance: eosBalance,
             cpu: cpuLimit,
-            cpuDurationUnit: cpuDurationUnit,
             net: netLimit,
             ram: ram,
             availableDurationUnits: availableDurationUnits,
@@ -110,48 +113,27 @@ struct SearchViewModel: AnyViewModel {
     
     private func makeRam(
         response: Observable<GetAccountResponseDTO>,
-        error: Observable<Error?>
+        error: Observable<Error?>,
+        unit: Observable<UnitInformationStorage>,
+        defaultUnit: UnitInformationStorage
     ) -> Output.RamUsage {
         let quota = composeMeasurementValueOrError(
             value: response.map(\.ramQuota),
             error: error,
             defaultValue: "-",
-            unit: .just(UnitInformationStorage.bytes),
-            defaultUnit: UnitInformationStorage.bytes)
+            unit: unit,
+            defaultUnit: defaultUnit)
         
         let usage = composeMeasurementValueOrError(
             value: response.map(\.ramUsage),
             error: error,
             defaultValue: "-",
-            unit: .just(UnitInformationStorage.bytes),
-            defaultUnit: UnitInformationStorage.bytes)
+            unit: unit,
+            defaultUnit: defaultUnit)
         
-        return .init(quota: quota, usage: usage)
-    }
-    
-    private func makeCPULimit(
-        cpuLimit: Observable<GetAccountLimitDTO>,
-        error: Observable<Error?>
-    ) -> Output.ResourceLimit {
-        let max = composeMeasurementValueOrError(
-            value: cpuLimit.map(\.max),
-            error: error,
-            defaultValue: "-",
-            unit: .just(UnitDuration.microseconds),
-            defaultUnit: UnitDuration.microseconds)
-        let available = composeMeasurementValueOrError(
-            value: cpuLimit.map(\.available),
-            error: error,
-            defaultValue: "-",
-            unit: .just(UnitDuration.microseconds),
-            defaultUnit: UnitDuration.microseconds)
-        let used = composeMeasurementValueOrError(
-            value: cpuLimit.map(\.used),
-            error: error,
-            defaultValue: "-",
-            unit: .just(UnitDuration.microseconds),
-            defaultUnit: UnitDuration.microseconds)
-        return .init(max: max, available: available, used: used)
+        let unit = unit.map { measurementFormatter.string(from: $0) }.asDriver(onErrorJustReturn: "")
+        
+        return .init(quota: quota, usage: usage, unit: unit)
     }
     
     private func makeLimit<T: Dimension>(
@@ -178,7 +160,8 @@ struct SearchViewModel: AnyViewModel {
             defaultValue: "-",
             unit: unit,
             defaultUnit: defaultUnit)
-        return .init(max: max, available: available, used: used)
+        let unit = unit.map { measurementFormatter.string(from: $0) }.asDriver(onErrorJustReturn: "")
+        return .init(max: max, available: available, used: used, unit: unit)
     }
     
     private func composeMeasurementValueOrError<T: Dimension>(

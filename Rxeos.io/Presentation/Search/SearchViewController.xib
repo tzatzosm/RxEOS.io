@@ -18,8 +18,10 @@
                 <outlet property="errorLabel" destination="P96-PU-7ng" id="KHG-gG-CDe"/>
                 <outlet property="netAvailableValue" destination="HzY-wn-Hh0" id="lKM-v1-T7l"/>
                 <outlet property="netMaxValue" destination="PSB-N5-nyn" id="fU0-cs-Xyo"/>
+                <outlet property="netStorageUnitSelectionButton" destination="0MH-K3-bxl" id="Aku-yT-Mze"/>
                 <outlet property="netUsedValue" destination="fKe-a6-SQs" id="aN6-lQ-8fC"/>
                 <outlet property="ramQuotaValue" destination="hJm-r2-apF" id="lpy-S0-JrZ"/>
+                <outlet property="ramStorageUnitSelectionButton" destination="Gw2-y9-vZb" id="PJo-Bt-O0o"/>
                 <outlet property="ramUsageValue" destination="N4U-S9-uhS" id="cl7-Zi-2VJ"/>
                 <outlet property="scrollView" destination="cmc-VF-b8m" id="wJa-T8-Is3"/>
                 <outlet property="searchBar" destination="jqp-1E-Wjd" id="oD7-Mb-rVq"/>
@@ -35,7 +37,7 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="04h-SK-AWI">
-                            <rect key="frame" x="20" y="0.0" width="374" height="759"/>
+                            <rect key="frame" x="20" y="0.0" width="374" height="793"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P96-PU-7ng">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -63,7 +65,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hKQ-Jf-OiP" userLabel="CPU">
                                     <rect key="frame" x="0.0" y="109" width="374" height="239.5"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="BHu-6z-9t8">
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="BHu-6z-9t8" userLabel="Header">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CPU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXH-xl-TDR" userLabel="CPU">
@@ -136,16 +138,29 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Foo-PA-A8f" userLabel="NET">
-                                    <rect key="frame" x="0.0" y="364.5" width="374" height="222.5"/>
+                                    <rect key="frame" x="0.0" y="364.5" width="374" height="239.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rm1-Yc-jOv">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="23"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                            <color key="textColor" systemColor="tertiaryLabelColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="cT1-Qj-TXQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rm1-Yc-jOv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="36" height="40"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <color key="textColor" systemColor="tertiaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0MH-K3-bxl">
+                                                    <rect key="frame" x="350" y="0.0" width="24" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="K7S-gB-ZVK"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="fJG-xy-OK1" userLabel="max">
-                                            <rect key="frame" x="0.0" y="33" width="374" height="56.5"/>
+                                            <rect key="frame" x="0.0" y="50" width="374" height="56.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoE-QD-btX" userLabel="Max">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -162,7 +177,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="FoH-SZ-W43" userLabel="available">
-                                            <rect key="frame" x="0.0" y="99.5" width="374" height="56.5"/>
+                                            <rect key="frame" x="0.0" y="116.5" width="374" height="56.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3d-1Y-Nt1" userLabel="Available">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -179,7 +194,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bcU-NA-xvc" userLabel="used">
-                                            <rect key="frame" x="0.0" y="166" width="374" height="56.5"/>
+                                            <rect key="frame" x="0.0" y="183" width="374" height="56.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Used" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u03-Hb-NWq" userLabel="Used">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -198,16 +213,29 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mPr-Qa-slj" userLabel="RAM">
-                                    <rect key="frame" x="0.0" y="603" width="374" height="156"/>
+                                    <rect key="frame" x="0.0" y="620" width="374" height="173"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RAM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUi-ex-800">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="23"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                            <color key="textColor" systemColor="tertiaryLabelColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="GNM-dO-Iwf">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RAM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUi-ex-800">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40.5" height="40"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <color key="textColor" systemColor="tertiaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gw2-y9-vZb">
+                                                    <rect key="frame" x="350" y="0.0" width="24" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="pnj-YW-iXK"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="7XF-QG-tYx" userLabel="quota">
-                                            <rect key="frame" x="0.0" y="33" width="374" height="56.5"/>
+                                            <rect key="frame" x="0.0" y="50" width="374" height="56.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fL5-32-gOY" userLabel="Quota">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -224,7 +252,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="v66-Ix-KMq" userLabel="usage">
-                                            <rect key="frame" x="0.0" y="99.5" width="374" height="56.5"/>
+                                            <rect key="frame" x="0.0" y="116.5" width="374" height="56.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Usage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJ7-hO-xr2" userLabel="Usage">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>

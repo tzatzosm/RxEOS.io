@@ -23,8 +23,10 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var netMaxValue: UILabel!
     @IBOutlet weak var netAvailableValue: UILabel!
     @IBOutlet weak var netUsedValue: UILabel!
+    @IBOutlet weak var netStorageUnitSelectionButton: UIButton!
     @IBOutlet weak var ramQuotaValue: UILabel!
     @IBOutlet weak var ramUsageValue: UILabel!
+    @IBOutlet weak var ramStorageUnitSelectionButton: UIButton!
     
     // MARK: - Private properties -
     private let viewModel: SearchViewModel
@@ -55,22 +57,28 @@ private extension SearchViewController {
         let searchInput = searchBar.rx.text.orEmpty.asObservable()
         let searchClicked = searchBar.rx.searchButtonClicked.asObservable()
         let cpuDurationUnitPublisher = PublishSubject<UnitDuration>()
+        let netStorageUnitPublisher = PublishSubject<UnitInformationStorage>()
+        let ramStorageUnitPublisher = PublishSubject<UnitInformationStorage>()
         let input = SearchViewModel.Input(
             searchInput: searchInput,
             searchClick: searchClicked,
-            cpuDurationUnit: cpuDurationUnitPublisher.startWith(.microseconds))
+            ramStorageUnit: ramStorageUnitPublisher.startWith(.bytes),
+            cpuDurationUnit: cpuDurationUnitPublisher.startWith(.microseconds),
+            netStorageUnit: netStorageUnitPublisher.startWith(.bytes))
         let output = viewModel.transform(input: input)
         output.errorMessage.drive(errorLabel.rx.text).disposed(by: disposeBag)
         output.eosBalance.drive(eosBalanceLabel.rx.text).disposed(by: disposeBag)
         output.cpu.max.drive(cpuMaxValue.rx.text).disposed(by: disposeBag)
         output.cpu.available.drive(cpuAvailableValue.rx.text).disposed(by: disposeBag)
         output.cpu.used.drive(cpuUsedValue.rx.text).disposed(by: disposeBag)
-        output.cpuDurationUnit.drive(cpuDurationUnitSelectionButton.rx.title(for: .normal)).disposed(by: disposeBag)
+        output.cpu.unit.drive(cpuDurationUnitSelectionButton.rx.title(for: .normal)).disposed(by: disposeBag)
         output.net.max.drive(netMaxValue.rx.text).disposed(by: disposeBag)
         output.net.available.drive(netAvailableValue.rx.text).disposed(by: disposeBag)
         output.net.used.drive(netUsedValue.rx.text).disposed(by: disposeBag)
+        output.net.unit.drive(netStorageUnitSelectionButton.rx.title(for: .normal)).disposed(by: disposeBag)
         output.ram.quota.drive(ramQuotaValue.rx.text).disposed(by: disposeBag)
         output.ram.usage.drive(ramUsageValue.rx.text).disposed(by: disposeBag)
+        output.ram.unit.drive(ramStorageUnitSelectionButton.rx.title(for: .normal)).disposed(by: disposeBag)
         
         scrollView.rx.didScroll
             .bind(to: rx.dismissKeyboardBinder)
@@ -79,6 +87,16 @@ private extension SearchViewController {
         cpuDurationUnitSelectionButton.rx.tap
             .withLatestFrom(output.availableDurationUnits)
             .bind(to: rx.unitSelectionBinder(publisher: cpuDurationUnitPublisher))
+            .disposed(by: disposeBag)
+        
+        netStorageUnitSelectionButton.rx.tap
+            .withLatestFrom(output.availableInformationStorageUnits)
+            .bind(to: rx.unitSelectionBinder(publisher: netStorageUnitPublisher))
+            .disposed(by: disposeBag)
+        
+        ramStorageUnitSelectionButton.rx.tap
+            .withLatestFrom(output.availableInformationStorageUnits)
+            .bind(to: rx.unitSelectionBinder(publisher: ramStorageUnitPublisher))
             .disposed(by: disposeBag)
     }
     
