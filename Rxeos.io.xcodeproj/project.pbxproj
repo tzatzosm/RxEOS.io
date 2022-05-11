@@ -21,6 +21,9 @@
 		50E32062282BB0AF00B46865 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32061282BB0AF00B46865 /* AppCoordinator.swift */; };
 		50E32067282BB30600B46865 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 50E32066282BB30600B46865 /* RxCocoa */; };
 		50E32069282BB30600B46865 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 50E32068282BB30600B46865 /* RxSwift */; };
+		50E32072282BCD4D00B46865 /* AnyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32071282BCD4D00B46865 /* AnyAPIService.swift */; };
+		50E32075282BCD7400B46865 /* GetAccountLimitDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32074282BCD7400B46865 /* GetAccountLimitDTO.swift */; };
+		50E32077282BCD8600B46865 /* GetAccountResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32076282BCD8600B46865 /* GetAccountResponseDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,9 @@
 		50E3205C282BAFB200B46865 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		50E3205F282BAFD100B46865 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
 		50E32061282BB0AF00B46865 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		50E32071282BCD4D00B46865 /* AnyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAPIService.swift; sourceTree = "<group>"; };
+		50E32074282BCD7400B46865 /* GetAccountLimitDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAccountLimitDTO.swift; sourceTree = "<group>"; };
+		50E32076282BCD8600B46865 /* GetAccountResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAccountResponseDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,7 @@
 				50E32053282BAE9200B46865 /* App */,
 				50E32055282BAEAA00B46865 /* Presentation */,
 				50E32054282BAE9C00B46865 /* Resources */,
+				50E32070282BCD1B00B46865 /* Services */,
 			);
 			path = Rxeos.io;
 			sourceTree = "<group>";
@@ -178,6 +185,24 @@
 				50E3205F282BAFD100B46865 /* AnyViewModel.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		50E32070282BCD1B00B46865 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				50E32073282BCD5F00B46865 /* Models */,
+				50E32071282BCD4D00B46865 /* AnyAPIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		50E32073282BCD5F00B46865 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				50E32074282BCD7400B46865 /* GetAccountLimitDTO.swift */,
+				50E32076282BCD8600B46865 /* GetAccountResponseDTO.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,10 +347,13 @@
 			files = (
 				50E32062282BB0AF00B46865 /* AppCoordinator.swift in Sources */,
 				50E32059282BAF9900B46865 /* SearchViewController.swift in Sources */,
+				50E32072282BCD4D00B46865 /* AnyAPIService.swift in Sources */,
 				50E32024282BAE8600B46865 /* AppDelegate.swift in Sources */,
 				50E3205D282BAFB200B46865 /* SearchViewModel.swift in Sources */,
 				50E32060282BAFD100B46865 /* AnyViewModel.swift in Sources */,
+				50E32075282BCD7400B46865 /* GetAccountLimitDTO.swift in Sources */,
 				50E32026282BAE8600B46865 /* SceneDelegate.swift in Sources */,
+				50E32077282BCD8600B46865 /* GetAccountResponseDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
