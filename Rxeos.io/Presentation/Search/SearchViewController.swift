@@ -14,6 +14,14 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchBar: UISearchBar!
     
     @IBOutlet weak var eosBalanceLabel: UILabel!
+    @IBOutlet weak var cpuMaxValue: UILabel!
+    @IBOutlet weak var cpuAvailableValue: UILabel!
+    @IBOutlet weak var cpuUsedValue: UILabel!
+    @IBOutlet weak var netMaxValue: UILabel!
+    @IBOutlet weak var netAvailableValue: UILabel!
+    @IBOutlet weak var netUsedValue: UILabel!
+    @IBOutlet weak var ramQuotaValue: UILabel!
+    @IBOutlet weak var ramUsageValue: UILabel!
     
     // MARK: - Private properties -
     private let viewModel: SearchViewModel
@@ -48,6 +56,13 @@ private extension SearchViewController {
             searchClick: searchClicked)
         let output = viewModel.transform(input: input)
         output.eosBalance.drive(eosBalanceLabel.rx.text).disposed(by: disposeBag)
-        // TODO: Add binding...
+        output.cpu.max.drive(cpuMaxValue.rx.text).disposed(by: disposeBag)
+        output.cpu.available.drive(cpuAvailableValue.rx.text).disposed(by: disposeBag)
+        output.cpu.used.drive(cpuUsedValue.rx.text).disposed(by: disposeBag)
+        output.net.max.drive(netMaxValue.rx.text).disposed(by: disposeBag)
+        output.net.available.drive(netAvailableValue.rx.text).disposed(by: disposeBag)
+        output.net.used.drive(netUsedValue.rx.text).disposed(by: disposeBag)
+        output.ram.quota.drive(ramQuotaValue.rx.text).disposed(by: disposeBag)
+        output.ram.usage.drive(ramUsageValue.rx.text).disposed(by: disposeBag)
     }
 }
