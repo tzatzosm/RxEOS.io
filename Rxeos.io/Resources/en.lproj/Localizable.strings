@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Rxeos.io
+
+  Created by Marsel Tzatzo on 11/5/22.
+  
+*/
+"error.accountNotFound" = "Account not found";
+"error.networkConnectionIsDown" = "Network is down";
+"error.generic" = "An unexpected error occurred";

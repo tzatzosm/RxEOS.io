@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     
     @IBOutlet var searchBar: UISearchBar!
     
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var eosBalanceLabel: UILabel!
     @IBOutlet weak var cpuMaxValue: UILabel!
     @IBOutlet weak var cpuAvailableValue: UILabel!
@@ -55,6 +56,7 @@ private extension SearchViewController {
             searchInput: searchInput,
             searchClick: searchClicked)
         let output = viewModel.transform(input: input)
+        output.errorMessage.drive(errorLabel.rx.text).disposed(by: disposeBag)
         output.eosBalance.drive(eosBalanceLabel.rx.text).disposed(by: disposeBag)
         output.cpu.max.drive(cpuMaxValue.rx.text).disposed(by: disposeBag)
         output.cpu.available.drive(cpuAvailableValue.rx.text).disposed(by: disposeBag)

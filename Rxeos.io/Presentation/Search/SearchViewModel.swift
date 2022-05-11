@@ -29,6 +29,7 @@ struct SearchViewModel: AnyViewModel {
             let usage: Driver<String>
         }
         
+        let errorMessage: Driver<String?>
         let eosBalance: Driver<String>
         let cpu: ResourceLimit
         let net: ResourceLimit
@@ -56,6 +57,8 @@ struct SearchViewModel: AnyViewModel {
         let getAccountResponse = getAccount.compactMap(\.element)
         let getAccountResponseError = getAccount.map(\.error)
         
+        let errorMessage = formatError(error: getAccountResponseError).startWith(nil)
+        
         let defaultValue = "-"
         
         let eosBalance = composeValueOrError(
@@ -73,7 +76,12 @@ struct SearchViewModel: AnyViewModel {
             unit: .just(UnitInformationStorage.bytes),
             defaultUnit: UnitInformationStorage.bytes)
         let ram = makeRam(response: getAccountResponse, error: getAccountResponseError)
-        return .init(eosBalance: eosBalance, cpu: cpuLimit, net: netLimit, ram: ram)
+        return .init(
+            errorMessage: errorMessage,
+            eosBalance: eosBalance,
+            cpu: cpuLimit,
+            net: netLimit,
+            ram: ram)
     }
     
     private func makeRam(
@@ -174,6 +182,22 @@ struct SearchViewModel: AnyViewModel {
             let value = value.startWith(defaultValue)
             let errorValue = error.compactMap { $0 }.map { _ in defaultValue }
             return Observable.merge(value, errorValue).asDriver(onErrorJustReturn: defaultValue)
+    }
+    
+    private func formatError(error: Observable<Error?>) -> Driver<String?> {
+        let emptyError = error.filter { $0 == nil }.map { _ -> String? in nil }
+        let errorMessage = error.compactMap { $0 }.map { error -> String? in
+            switch error {
+            case let APIError.invalidStatusCode(code) where code == 500:
+                return NSLocalizedString("error.accountNotFound", comment: "")
+            default:
+                if error.isNetworkError {
+                    return NSLocalizedString("error.networkConnectionIsDown", comment: "")
+                }
+                return NSLocalizedString("error.generic", comment: "")
+            }
+        }
+        return Observable.merge(emptyError, errorMessage).asDriver(onErrorJustReturn: nil)
     }
 }
 

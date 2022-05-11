@@ -31,6 +31,8 @@
 		50E32082282BD1A500B46865 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32081282BD1A500B46865 /* JSONDecoder.swift */; };
 		50E32084282BD1AF00B46865 /* JSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32083282BD1AF00B46865 /* JSONEncoder.swift */; };
 		50E32086282BD3F500B46865 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32085282BD3F500B46865 /* APIError.swift */; };
+		50E32089282BE32500B46865 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50E3208B282BE32500B46865 /* Localizable.strings */; };
+		50E3208D282BE5F700B46865 /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E3208C282BE5F700B46865 /* Error+Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		50E32081282BD1A500B46865 /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		50E32083282BD1AF00B46865 /* JSONEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEncoder.swift; sourceTree = "<group>"; };
 		50E32085282BD3F500B46865 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		50E3208A282BE32500B46865 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		50E3208C282BE5F700B46865 /* Error+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Network.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +174,7 @@
 				50E3202C282BAE8800B46865 /* Assets.xcassets */,
 				50E3202E282BAE8800B46865 /* LaunchScreen.storyboard */,
 				50E32031282BAE8800B46865 /* Info.plist */,
+				50E3208B282BE32500B46865 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -230,6 +235,7 @@
 			children = (
 				50E32081282BD1A500B46865 /* JSONDecoder.swift */,
 				50E32083282BD1AF00B46865 /* JSONEncoder.swift */,
+				50E3208C282BE5F700B46865 /* Error+Network.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -348,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50E32030282BAE8800B46865 /* LaunchScreen.storyboard in Resources */,
+				50E32089282BE32500B46865 /* Localizable.strings in Resources */,
 				50E3202D282BAE8800B46865 /* Assets.xcassets in Resources */,
 				50E3205A282BAF9900B46865 /* SearchViewController.xib in Resources */,
 			);
@@ -380,6 +387,7 @@
 				50E32072282BCD4D00B46865 /* AnyAPIService.swift in Sources */,
 				50E32024282BAE8600B46865 /* AppDelegate.swift in Sources */,
 				50E3205D282BAFB200B46865 /* SearchViewModel.swift in Sources */,
+				50E3208D282BE5F700B46865 /* Error+Network.swift in Sources */,
 				50E32082282BD1A500B46865 /* JSONDecoder.swift in Sources */,
 				50E32060282BAFD100B46865 /* AnyViewModel.swift in Sources */,
 				50E32075282BCD7400B46865 /* GetAccountLimitDTO.swift in Sources */,
@@ -440,6 +448,14 @@
 				50E3202F282BAE8800B46865 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		50E3208B282BE32500B46865 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50E3208A282BE32500B46865 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
