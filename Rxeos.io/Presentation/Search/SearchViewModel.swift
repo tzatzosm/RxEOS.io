@@ -78,7 +78,7 @@ struct SearchViewModel: AnyViewModel {
         let getAccountResponse = getAccount.compactMap(\.element)
         let getAccountResponseError = getAccount.map(\.error)
         
-        let errorMessage = formatError(error: getAccountResponseError).startWith(nil)
+        let errorMessage = formatError(error: getAccountResponseError).startWith(nil).debug()
         
         let defaultValue = "-"
         
@@ -90,17 +90,20 @@ struct SearchViewModel: AnyViewModel {
             limit: getAccountResponse.map(\.cpuLimit),
             error: getAccountResponseError,
             unit: input.cpuDurationUnit,
-            defaultUnit: .microseconds)
+            defaultUnit: .microseconds,
+            defaultValue: "-")
         let netLimit = makeLimit(
             limit: getAccountResponse.map(\.netLimit),
             error: getAccountResponseError,
             unit: input.netStorageUnit,
-            defaultUnit: .bytes)
+            defaultUnit: .bytes,
+            defaultValue: "-")
         let ram = makeRam(
             response: getAccountResponse,
             error: getAccountResponseError,
             unit: input.ramStorageUnit,
-            defaultUnit: .bytes)
+            defaultUnit: .bytes,
+            defaultValue: "-")
         return .init(
             errorMessage: errorMessage,
             eosBalance: eosBalance,
@@ -115,24 +118,24 @@ struct SearchViewModel: AnyViewModel {
         response: Observable<GetAccountResponseDTO>,
         error: Observable<Error?>,
         unit: Observable<UnitInformationStorage>,
-        defaultUnit: UnitInformationStorage
+        defaultUnit: UnitInformationStorage,
+        defaultValue: String
     ) -> Output.RamUsage {
         let quota = composeMeasurementValueOrError(
             value: response.map(\.ramQuota),
             error: error,
-            defaultValue: "-",
+            defaultValue: defaultValue,
             unit: unit,
-            defaultUnit: defaultUnit)
+            defaultUnit: defaultUnit).startWith(defaultValue)
         
         let usage = composeMeasurementValueOrError(
             value: response.map(\.ramUsage),
             error: error,
-            defaultValue: "-",
+            defaultValue: defaultValue,
             unit: unit,
-            defaultUnit: defaultUnit)
+            defaultUnit: defaultUnit).startWith(defaultValue)
         
         let unit = unit.map { measurementFormatter.string(from: $0) }.asDriver(onErrorJustReturn: "")
-        
         return .init(quota: quota, usage: usage, unit: unit)
     }
     
@@ -140,26 +143,28 @@ struct SearchViewModel: AnyViewModel {
         limit: Observable<GetAccountLimitDTO>,
         error: Observable<Error?>,
         unit: Observable<T>,
-        defaultUnit: T
+        defaultUnit: T,
+        defaultValue: String
     ) -> Output.ResourceLimit {
         let max = composeMeasurementValueOrError(
             value: limit.map(\.max),
             error: error,
-            defaultValue: "-",
+            defaultValue: defaultValue,
             unit: unit,
             defaultUnit: defaultUnit)
+            .startWith(defaultValue)
         let available = composeMeasurementValueOrError(
             value: limit.map(\.available),
             error: error,
-            defaultValue: "-",
+            defaultValue: defaultValue,
             unit: unit,
-            defaultUnit: defaultUnit)
+            defaultUnit: defaultUnit).startWith(defaultValue)
         let used = composeMeasurementValueOrError(
             value: limit.map(\.used),
             error: error,
-            defaultValue: "-",
+            defaultValue: defaultValue,
             unit: unit,
-            defaultUnit: defaultUnit)
+            defaultUnit: defaultUnit).startWith(defaultValue)
         let unit = unit.map { measurementFormatter.string(from: $0) }.asDriver(onErrorJustReturn: "")
         return .init(max: max, available: available, used: used, unit: unit)
     }
