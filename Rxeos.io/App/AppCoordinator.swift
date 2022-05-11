@@ -30,6 +30,14 @@ private extension AppCoordinator {
     }
     
     func makeSearchViewModel() -> SearchViewModel {
-        return SearchViewModel()
+        return SearchViewModel(apiService: makeAPIService())
+    }
+    
+    func makeAPIService() -> AnyAPIService {
+        return DefaultAPIService(baseUrl: "https://eos.greymass.com", decoder: JSONDecoder.camelCaseDecoder)
+    }
+    
+    func makeBaseURL() -> String {
+        return "https://eos.greymass.com"
     }
 }
