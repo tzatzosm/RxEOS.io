@@ -12,6 +12,8 @@
 		50582805282C26E200BBB616 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 50582804282C26E200BBB616 /* RxCocoa */; };
 		50582807282C26E200BBB616 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 50582806282C26E200BBB616 /* RxSwift */; };
 		50582809282C26E200BBB616 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 50582808282C26E200BBB616 /* RxTest */; };
+		5058280C282C327500BBB616 /* EOSSearchInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058280B282C327500BBB616 /* EOSSearchInputValidator.swift */; };
+		5058280E282C36CE00BBB616 /* MockValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058280D282C36CE00BBB616 /* MockValidator.swift */; };
 		50E32024282BAE8600B46865 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32023282BAE8600B46865 /* AppDelegate.swift */; };
 		50E32026282BAE8600B46865 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E32025282BAE8600B46865 /* SceneDelegate.swift */; };
 		50E3202D282BAE8800B46865 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50E3202C282BAE8800B46865 /* Assets.xcassets */; };
@@ -59,6 +61,8 @@
 /* Begin PBXFileReference section */
 		505827E8282C204F00BBB616 /* SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
 		505827EB282C209400BBB616 /* MockAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
+		5058280B282C327500BBB616 /* EOSSearchInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EOSSearchInputValidator.swift; sourceTree = "<group>"; };
+		5058280D282C36CE00BBB616 /* MockValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockValidator.swift; sourceTree = "<group>"; };
 		50E32020282BAE8600B46865 /* Rxeos.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rxeos.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E32023282BAE8600B46865 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50E32025282BAE8600B46865 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				505827EB282C209400BBB616 /* MockAPIService.swift */,
+				5058280D282C36CE00BBB616 /* MockValidator.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -131,6 +136,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5058280A282C325D00BBB616 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5058280B282C327500BBB616 /* EOSSearchInputValidator.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		50E32017282BAE8600B46865 = {
@@ -161,6 +174,7 @@
 				50E32055282BAEAA00B46865 /* Presentation */,
 				50E32054282BAE9C00B46865 /* Resources */,
 				50E32070282BCD1B00B46865 /* Services */,
+				5058280A282C325D00BBB616 /* Utilities */,
 			);
 			path = Rxeos.io;
 			sourceTree = "<group>";
@@ -423,6 +437,7 @@
 				50E32060282BAFD100B46865 /* AnyViewModel.swift in Sources */,
 				50E32075282BCD7400B46865 /* GetAccountLimitDTO.swift in Sources */,
 				50E3207B282BCE7200B46865 /* URLRequestConvertible.swift in Sources */,
+				5058280C282C327500BBB616 /* EOSSearchInputValidator.swift in Sources */,
 				50E32084282BD1AF00B46865 /* JSONEncoder.swift in Sources */,
 				50E32026282BAE8600B46865 /* SceneDelegate.swift in Sources */,
 				50E32079282BCE0600B46865 /* DefaultAPIService.swift in Sources */,
@@ -438,6 +453,7 @@
 			files = (
 				505827EC282C209400BBB616 /* MockAPIService.swift in Sources */,
 				505827E9282C204F00BBB616 /* SearchViewModelTests.swift in Sources */,
+				5058280E282C36CE00BBB616 /* MockValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

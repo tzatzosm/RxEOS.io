@@ -18,6 +18,7 @@ class SearchViewModelTests: XCTestCase {
     private let disposeBag = DisposeBag()
     
     private var service: MockAPIService!
+    private var validator: MockValidator!
     private var sut: SearchViewModel!
     private var input: SearchViewModel.Input!
     private var output: SearchViewModel.Output!
@@ -45,7 +46,8 @@ class SearchViewModelTests: XCTestCase {
         super.setUp()
         scheduler = TestScheduler(initialClock: 0)
         service = MockAPIService()
-        sut = SearchViewModel(apiService: service)
+        validator = MockValidator()
+        sut = SearchViewModel(apiService: service, inputValidator: validator)
         input = .init(
             searchInput: accountNameSubject.asObservable(),
             searchClick: searchSubject.asObservable(),
@@ -62,6 +64,31 @@ class SearchViewModelTests: XCTestCase {
         
         // Then
         XCTAssertEqual(errorMessage.events, [.next(0, nil)])
+    }
+    
+    func test_whenInputIsInvalid_errorMessageIsNotNilAndItsValueIsNetworkConnectionDown() {
+        // Given
+        validator.isValid = false
+        
+        // When
+        let errorMessage = scheduler.createObserver(String?.self)
+        output.errorMessage.drive(errorMessage).disposed(by: disposeBag)
+        
+        scheduler
+            .createColdObservable([.next(9, "searchTerm")])
+            .bind(to: accountNameSubject)
+            .disposed(by: disposeBag)
+        
+        scheduler
+            .createColdObservable([.next(10, ())])
+            .bind(to: searchSubject)
+            .disposed(by: disposeBag)
+        scheduler.start()
+        
+        // Then
+        XCTAssertEqual(
+            errorMessage.events,
+            [.next(0, nil), .next(10, NSLocalizedString("error.validationFailed", comment: ""))])
     }
     
     func test_whenErrorIsNoNetwork_errorMessageIsNotNilAndItsValueIsNetworkConnectionDown() {
@@ -86,7 +113,7 @@ class SearchViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(
             errorMessage.events,
-            [.next(0, nil), .next(10, NSLocalizedString("Network is down", comment: ""))])
+            [.next(0, nil), .next(10, NSLocalizedString("error.networkConnectionIsDown", comment: ""))])
     }
     
     func test_whenError500_errorMessageIsNotNilAndItsValueIsAccountNotFound() {

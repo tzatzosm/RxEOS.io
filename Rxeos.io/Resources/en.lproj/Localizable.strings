@@ -5,6 +5,7 @@
   Created by Marsel Tzatzo on 11/5/22.
   
 */
+"error.validationFailed" = "Input is not in the correct format \"[a-z1-5\.]{1,12}\".";
 "error.accountNotFound" = "Account not found";
 "error.networkConnectionIsDown" = "Network is down";
 "error.generic" = "An unexpected error occurred";

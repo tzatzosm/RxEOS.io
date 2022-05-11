@@ -9,7 +9,15 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+protocol AnyInputValidator {
+    func validate(input: String) -> Bool
+}
+
 struct SearchViewModel: AnyViewModel {
+    
+    enum Error: Swift.Error {
+        case validationError
+    }
     
     struct Input {
         var searchInput: Observable<String>
@@ -50,6 +58,7 @@ struct SearchViewModel: AnyViewModel {
     }()
     
     private let apiService: AnyAPIService
+    private let inputValidator: AnyInputValidator
     
     private let availableDurationUnits = Driver.just([
         UnitDuration.microseconds,
@@ -65,36 +74,47 @@ struct SearchViewModel: AnyViewModel {
         UnitInformationStorage.gigabytes,
         UnitInformationStorage.terabytes])
     
-    init(apiService: AnyAPIService) {
+    init(apiService: AnyAPIService, inputValidator: AnyInputValidator) {
         self.apiService = apiService
+        self.inputValidator = inputValidator
     }
     
     func transform(input: Input) -> Output {
-        let getAccount = input.searchClick
+        let search = input.searchClick
             .withLatestFrom(input.searchInput)
+        
+        let validationSuccess = search.filter { inputValidator.validate(input: $0) }
+        
+        let validationFailedError = search
+            .filter { !inputValidator.validate(input: $0) }
+            .map { _ -> Swift.Error? in Error.validationError }
+        
+        let getAccount = validationSuccess
             .flatMap { apiService.getAccount(accountName: $0).materialize() }
             .share()
         
         let getAccountResponse = getAccount.compactMap(\.element)
         let getAccountResponseError = getAccount.map(\.error)
         
-        let errorMessage = formatError(error: getAccountResponseError).startWith(nil).debug()
+        let error = Observable.merge(getAccountResponseError, validationFailedError)
+        
+        let errorMessage = formatError(error: error).startWith(nil)
         
         let defaultValue = "-"
         
         let eosBalance = composeValueOrError(
             value: getAccountResponse.map(\.coreLiquidBalance),
-            error: getAccountResponseError,
+            error: error,
             defaultValue: defaultValue)
         let cpuLimit = makeLimit(
             limit: getAccountResponse.map(\.cpuLimit),
-            error: getAccountResponseError,
+            error: error,
             unit: input.cpuDurationUnit,
             defaultUnit: .microseconds,
             defaultValue: "-")
         let netLimit = makeLimit(
             limit: getAccountResponse.map(\.netLimit),
-            error: getAccountResponseError,
+            error: error,
             unit: input.netStorageUnit,
             defaultUnit: .bytes,
             defaultValue: "-")
@@ -116,7 +136,7 @@ struct SearchViewModel: AnyViewModel {
     
     private func makeRam(
         response: Observable<GetAccountResponseDTO>,
-        error: Observable<Error?>,
+        error: Observable<Swift.Error?>,
         unit: Observable<UnitInformationStorage>,
         defaultUnit: UnitInformationStorage,
         defaultValue: String
@@ -141,7 +161,7 @@ struct SearchViewModel: AnyViewModel {
     
     private func makeLimit<T: Dimension>(
         limit: Observable<GetAccountLimitDTO>,
-        error: Observable<Error?>,
+        error: Observable<Swift.Error?>,
         unit: Observable<T>,
         defaultUnit: T,
         defaultValue: String
@@ -171,7 +191,7 @@ struct SearchViewModel: AnyViewModel {
     
     private func composeMeasurementValueOrError<T: Dimension>(
         value: Observable<Int>,
-        error: Observable<Error?>,
+        error: Observable<Swift.Error?>,
         defaultValue: String,
         unit: Observable<T>,
         defaultUnit: T
@@ -189,17 +209,19 @@ struct SearchViewModel: AnyViewModel {
     
     private func composeValueOrError<T>(
         value: Observable<T>,
-        error: Observable<Error?>,
+        error: Observable<Swift.Error?>,
         defaultValue: T) -> Driver<T> {
             let value = value.startWith(defaultValue)
             let errorValue = error.compactMap { $0 }.map { _ in defaultValue }
             return Observable.merge(value, errorValue).asDriver(onErrorJustReturn: defaultValue)
     }
     
-    private func formatError(error: Observable<Error?>) -> Driver<String?> {
+    private func formatError(error: Observable<Swift.Error?>) -> Driver<String?> {
         let emptyError = error.filter { $0 == nil }.map { _ -> String? in nil }
         let errorMessage = error.compactMap { $0 }.map { error -> String? in
             switch error {
+            case Error.validationError:
+                return NSLocalizedString("error.validationFailed", comment: "")
             case let APIError.invalidStatusCode(code) where code == 500:
                 return NSLocalizedString("error.accountNotFound", comment: "")
             default:

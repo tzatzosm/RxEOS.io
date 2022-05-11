@@ -30,7 +30,13 @@ private extension AppCoordinator {
     }
     
     func makeSearchViewModel() -> SearchViewModel {
-        return SearchViewModel(apiService: makeAPIService())
+        return SearchViewModel(
+            apiService: makeAPIService(),
+            inputValidator: EOSSearchInputValidator())
+    }
+    
+    func makeInputValidator() -> AnyInputValidator {
+        return EOSSearchInputValidator()
     }
     
     func makeAPIService() -> AnyAPIService {
