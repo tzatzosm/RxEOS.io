@@ -6,12 +6,22 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 struct SearchViewModel: AnyViewModel {
-    struct Input { }
-    struct Output { }
+    struct Input {
+        var searchInput: Observable<String>
+        var searchClick: Observable<()>
+    }
+    struct Output {
+        var eosBalance: Driver<String>
+    }
     
     func transform(input: Input) -> Output {
-        return .init()
+        let eosBalance = input.searchClick
+            .withLatestFrom(input.searchInput)
+            .asDriver(onErrorJustReturn: "-")
+        return .init(eosBalance: eosBalance)
     }
 }

@@ -6,11 +6,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SearchViewController: UIViewController {
-
+    
+    @IBOutlet var searchBar: UISearchBar!
+    
+    @IBOutlet weak var eosBalanceLabel: UILabel!
+    
     // MARK: - Private properties -
     private let viewModel: SearchViewModel
+    private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle -
     
@@ -25,15 +32,22 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.titleView = searchBar
+        
         bindViewModel()
-        // Do any additional setup after loading the view.
     }
 }
 
 private extension SearchViewController {
     func bindViewModel() {
-        let input = SearchViewModel.Input()
+        let searchInput = searchBar.rx.text.orEmpty.asObservable()
+        let searchClicked = searchBar.rx.searchButtonClicked.asObservable()
+        let input = SearchViewModel.Input(
+            searchInput: searchInput,
+            searchClick: searchClicked)
         let output = viewModel.transform(input: input)
+        output.eosBalance.drive(eosBalanceLabel.rx.text).disposed(by: disposeBag)
         // TODO: Add binding...
     }
 }
