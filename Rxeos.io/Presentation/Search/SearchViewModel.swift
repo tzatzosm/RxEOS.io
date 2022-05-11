@@ -14,6 +14,7 @@ struct SearchViewModel: AnyViewModel {
     struct Input {
         var searchInput: Observable<String>
         var searchClick: Observable<()>
+        let cpuDurationUnit: Observable<UnitDuration>
     }
     
     struct Output {
@@ -32,8 +33,11 @@ struct SearchViewModel: AnyViewModel {
         let errorMessage: Driver<String?>
         let eosBalance: Driver<String>
         let cpu: ResourceLimit
+        let cpuDurationUnit: Driver<String>
         let net: ResourceLimit
         let ram: RamUsage
+        let availableDurationUnits: Driver<[UnitDuration]>
+        let availableInformationStorageUnits: Driver<[UnitInformationStorage]>
     }
     
     private let measurementFormatter: MeasurementFormatter = {
@@ -43,6 +47,20 @@ struct SearchViewModel: AnyViewModel {
     }()
     
     private let apiService: AnyAPIService
+    
+    private let availableDurationUnits = Driver.just([
+        UnitDuration.microseconds,
+        UnitDuration.milliseconds,
+        UnitDuration.seconds,
+        UnitDuration.minutes,
+        UnitDuration.hours])
+    
+    private let availableInformationsStorageUnits = Driver.just([
+        UnitInformationStorage.bytes,
+        UnitInformationStorage.kilobytes,
+        UnitInformationStorage.megabytes,
+        UnitInformationStorage.gigabytes,
+        UnitInformationStorage.terabytes])
     
     init(apiService: AnyAPIService) {
         self.apiService = apiService
@@ -68,8 +86,11 @@ struct SearchViewModel: AnyViewModel {
         let cpuLimit = makeLimit(
             limit: getAccountResponse.map(\.cpuLimit),
             error: getAccountResponseError,
-            unit: .just(UnitDuration.microseconds),
+            unit: input.cpuDurationUnit,
             defaultUnit: UnitDuration.microseconds)
+        let cpuDurationUnit = input.cpuDurationUnit
+            .map { measurementFormatter.string(from: $0) }
+            .asDriver(onErrorJustReturn: "")
         let netLimit = makeLimit(
             limit: getAccountResponse.map(\.netLimit),
             error: getAccountResponseError,
@@ -80,8 +101,11 @@ struct SearchViewModel: AnyViewModel {
             errorMessage: errorMessage,
             eosBalance: eosBalance,
             cpu: cpuLimit,
+            cpuDurationUnit: cpuDurationUnit,
             net: netLimit,
-            ram: ram)
+            ram: ram,
+            availableDurationUnits: availableDurationUnits,
+            availableInformationStorageUnits: availableInformationsStorageUnits)
     }
     
     private func makeRam(
